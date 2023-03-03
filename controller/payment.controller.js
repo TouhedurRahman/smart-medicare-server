@@ -96,7 +96,7 @@ module.exports.getOrderPayment = async (req, res, next) => {
     try {
         const tran_id = req.params.id;
         const result = await Payment.findOne({ tran_id: tran_id })
-
+         
         res.status(200).json({
             result
         })

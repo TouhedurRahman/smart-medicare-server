@@ -136,7 +136,11 @@ module.exports.medicinePayment = async (req, res, next) => {
 module.exports.getPaymentMedicine = async (req ,res) =>{
     try{
         const {email} = req.params;
-     const result =  await MediPayment.find({email:email})
+        let result;
+        if(email){
+            result = await MediPayment.find({ email: email })
+        }
+        result = await MediPayment.find({})
      res.status(200).json({
         result: result
     })

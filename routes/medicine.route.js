@@ -14,7 +14,9 @@ router
   .get(medicine.getPaymentMedicine)
 router
   .route("/medicine/init")
+  .get(medicine.getPaymentMedicine)
   .post(medicine.medicinePayment)
+
   router
   .route("/medicine/init/:id")
   .patch(medicine.updatePaymentMedicine)
