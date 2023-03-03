@@ -10,8 +10,10 @@ router
   .get(medicine.getMedicine)
   .post(medicine.postMedicine)
 router
-  .route("/medicine/init")
+  .route("/medicine/init/:email")
   .get(medicine.getPaymentMedicine)
+router
+  .route("/medicine/init")
   .post(medicine.medicinePayment)
   router
   .route("/medicine/init/:id")

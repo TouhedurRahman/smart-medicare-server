@@ -42,6 +42,7 @@ const paymentSchema = mongoose.Schema({
     val_id:String,
     payment:String,
     product_id:ObjectId,
+    email:String
 },
     {
         timestamps: true

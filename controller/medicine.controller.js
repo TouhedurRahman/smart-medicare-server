@@ -115,6 +115,7 @@ module.exports.medicinePayment = async (req, res, next) => {
             product_id:req.body.id,
             ship_postcode: 1000,
             ship_country: 'Bangladesh',
+            email:req.body.email
         };
         const result = await MediPayment(data).save();
         const sslcz = new SSLCommerzPayment(process.env.STORE_ID, process.env.STORE_PASSWORD, false)
@@ -134,7 +135,8 @@ module.exports.medicinePayment = async (req, res, next) => {
 }
 module.exports.getPaymentMedicine = async (req ,res) =>{
     try{
-     const result =  await MediPayment.find({})
+        const {email} = req.params;
+     const result =  await MediPayment.find({email:email})
      res.status(200).json({
         result: result
     })

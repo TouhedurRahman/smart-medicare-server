@@ -7,14 +7,13 @@ const appointmentSchema = mongoose.Schema({
       required: [true, "please provide a name"],
       trim: true
    },
-   //   userEmail:{
-   //    type:String,
-   //    required:[true,"please login first"],
-   //    validate:[validator.isEmail]
-   //   },
+     userEmail:{
+      type:String,
+      required:[true,"please login first"],
+      validate:[validator.isEmail]
+     },
    userName: {
       type: String,
-
    },
    chamber:{
       type:String,

@@ -3,7 +3,8 @@ const Doctor = require("../model/doctor.model");
 
 module.exports.getAppointmentService = async (email) => {
   const date = new Date();
-  const result = await Appointment.find({ "date": { $gte: date } });
+  const result = await Appointment.find({ userEmail: email });
+  console.log(result)
   return result;
 }
 module.exports.postAppointmentService = async (data) => {
