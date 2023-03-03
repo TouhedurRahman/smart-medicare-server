@@ -140,7 +140,9 @@ module.exports.getPaymentMedicine = async (req ,res) =>{
         if(email){
             result = await MediPayment.find({ email: email })
         }
-        result = await MediPayment.find({})
+      else{
+            result = await MediPayment.find({})
+         }
      res.status(200).json({
         result: result
     })
