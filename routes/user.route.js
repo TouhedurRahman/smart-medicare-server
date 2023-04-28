@@ -5,22 +5,33 @@ const upload = require("../middleware/uploader");
 const { verifyToken } = require("../middleware/verifyToken");
 const router = express.Router();
 //  brand get and update data 
+
+router
+  .route("/user")
+  .get(userController.getUser)
+
 router
   .route("/sign")
   .post(userController.postSignUp)
+
 router
   .route("/login")
   .post(userController.postSignIn)
+
 router
   .route("/file/upload")
-  .post( upload.single("file"), userController.postFileUpload)
+  .post(upload.single("file"), userController.postFileUpload)
+
 router
   .route("/getme/:id")
   .get(userController.getMe)
+
 router
   .route("/user/jwt")
   .get(userController.getToken)
-  router
+
+router
   .route("/user/:id")
   .patch(userController.userMakeAdmin)
+
 module.exports = router;
