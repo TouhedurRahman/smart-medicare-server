@@ -1,6 +1,7 @@
 const {
     getAppointmentService,
     getPaidAppointmentService,
+    getAppointmentServiceById,
     postAppointmentService,
     deleteAppointmentService,
     ratingUpdateAppointmentService } = require("../service/appointment.service");
@@ -27,6 +28,20 @@ module.exports.getPaidAppointment = async (req, res) => {
         })
     }
     catch {
+        res.status(400).json({
+            result: error.message
+        })
+    }
+}
+
+module.exports.getAppointmentById = async (req, res, next) => {
+    try {
+        const result = await getAppointmentServiceById(req.params.id);
+        res.status(200).json({
+            result: result
+        })
+    }
+    catch (error) {
         res.status(400).json({
             result: error.message
         })

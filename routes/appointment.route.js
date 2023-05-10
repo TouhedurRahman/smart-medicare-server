@@ -14,6 +14,7 @@ router
 
 router
   .route("/appointment/:id")
+  .get(appointmentController.getAppointmentById)
   .delete(appointmentController.deleteAppointment)
   .post(appointmentController.ratingUpdateAppointment)
 

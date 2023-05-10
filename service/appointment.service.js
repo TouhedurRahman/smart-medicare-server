@@ -4,7 +4,11 @@ const Doctor = require("../model/doctor.model");
 module.exports.getAppointmentService = async (email) => {
 	const date = new Date();
 	const result = await Appointment.find({ userEmail: email });
-	console.log(result)
+	return result;
+}
+
+module.exports.getAppointmentServiceById = async (id) => {
+	const result = await Appointment.findOne({ _id: id });
 	return result;
 }
 
@@ -14,11 +18,8 @@ module.exports.getPaidAppointmentService = async (data) => {
 }
 
 module.exports.postAppointmentService = async (data) => {
-
-	const trys = await Doctor.updateOne({ _id: data.doctorId }, { $inc: { 'viewCount': 1 } }, { runValidators: true })
-
+	const trys = await Doctor.updateOne({ _id: data.doctorId }, { $inc: { 'viewCount': 1 } }, { runValidators: true });
 	const result = await Appointment.create(data);
-
 	return result;
 }
 

@@ -4,7 +4,8 @@ const {
     getDoctorServiceById,
     cancelDoctorServiceById,
     updateDoctorServiceById
-     } = require("../service/doctor.service")
+} = require("../service/doctor.service");
+
 module.exports.getDoctor = async (req, res, next) => {
     try {
         const result = await getDoctorService();
@@ -13,46 +14,46 @@ module.exports.getDoctor = async (req, res, next) => {
         })
     }
     catch (error) {
-        
         res.status(400).json({
             result: error.message
         })
     }
 }
+
 module.exports.postDoctor = async (req, res, next) => {
-    try {  
+    try {
         const result = await postDoctorService(req.body);
         res.status(200).json({
             result: result
         })
     }
     catch (error) {
-      
         res.status(400).json({
             error: error.message
         })
     }
 }
+
 module.exports.getDoctorById = async (req, res, next) => {
     try {
-
         const result = await getDoctorServiceById(req.params.id);
         res.status(200).json({
             result: result
         })
     }
     catch (error) {
-      
+
         res.status(400).json({
             result: error.message
         })
     }
 }
+
 module.exports.updateDoctorById = async (req, res, next) => {
     try {
         const { id } = req.params;
         const data = req.body;
-        const result = await updateDoctorServiceById(data,id);
+        const result = await updateDoctorServiceById(data, id);
         res.status(200).json({
             result: result
         })
@@ -64,9 +65,9 @@ module.exports.updateDoctorById = async (req, res, next) => {
         })
     }
 }
+
 module.exports.cancelDoctorById = async (req, res, next) => {
     try {
-        
         const result = await cancelDoctorServiceById(req.params.id);
         res.status(200).json({
             result: result

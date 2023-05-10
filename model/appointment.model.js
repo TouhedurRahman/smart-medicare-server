@@ -1,27 +1,28 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
 const { ObjectId } = mongoose.Schema.Types;
+
 const appointmentSchema = mongoose.Schema({
    name: {
       type: String,
       required: [true, "please provide a name"],
       trim: true
    },
-     userEmail:{
-      type:String,
-      required:[true,"please login first"],
-      validate:[validator.isEmail]
-     },
+   userEmail: {
+      type: String,
+      required: [true, "please login first"],
+      validate: [validator.isEmail]
+   },
    userName: {
       type: String,
    },
-   chamber:{
-      type:String,
-      required:[true,"must be set a chamber"]
-     }, visitTime:{
-      type:String,
-      required:[true,"must be set a visit time"]
-     },
+   chamber: {
+      type: String,
+      required: [true, "must be set a chamber"]
+   }, visitTime: {
+      type: String,
+      required: [true, "must be set a visit time"]
+   },
    patientName: {
       type: String,
       required: [true, "provide a patient name"],
@@ -52,15 +53,16 @@ const appointmentSchema = mongoose.Schema({
       type: Date,
       require: [true, "pleasae sent date"]
    },
-   paymentStatus:{
-      type:String,
-      enum:["paid","unpaid"],
-      default:"unpaid"
+   paymentStatus: {
+      type: String,
+      enum: ["paid", "unpaid"],
+      default: "unpaid"
    }
 
 },
    {
       timestamps: true
    })
+
 const Appointment = new mongoose.model("Appointment", appointmentSchema);
-module.exports = Appointment 
+module.exports = Appointment;
