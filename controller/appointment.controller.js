@@ -4,7 +4,8 @@ const {
     getAppointmentServiceById,
     postAppointmentService,
     deleteAppointmentService,
-    ratingUpdateAppointmentService } = require("../service/appointment.service");
+    ratingUpdateAppointmentService
+} = require("../service/appointment.service");
 
 module.exports.getAppointment = async (req, res, next) => {
     try {
