@@ -2,7 +2,9 @@ const { postMedicineBrandService,
     medicineBrandServiceById,
     getMedicineBrandService,
     updateMedicineBrandService,
-    deleteMedicineBrandService } = require("../service/medicineBrand.service");
+    deleteMedicineBrandService
+} = require("../service/medicineBrand.service");
+
 module.exports.getMedicineBrand = async (req, res, next) => {
     try {
         const result = await getMedicineBrandService();
@@ -17,6 +19,7 @@ module.exports.getMedicineBrand = async (req, res, next) => {
         })
     }
 }
+
 module.exports.postMedicineBrand = async (req, res, next) => {
     try {
         const data = req.body;
@@ -26,17 +29,19 @@ module.exports.postMedicineBrand = async (req, res, next) => {
             result: result
         })
     }
-    catch (error) {;
+    catch (error) {
+        ;
         res.status(500).json({
             error: error.message
-        }) 
+        })
     }
 }
+
 module.exports.getMedicineBrandById = async (req, res, next) => {
     try {
         const id = req.params.id;
         const result = await medicineBrandServiceById(id);
-         
+
         res.status(200).json({
             message: "success",
             result: result
@@ -48,23 +53,24 @@ module.exports.getMedicineBrandById = async (req, res, next) => {
         })
     }
 }
+
 module.exports.updateMedicineBrand = async (req, res, next) => {
-try {
-     
-    const result = await updateMedicineBrandService(req.body,req.params.id);
-    res.status(200).json({
-       message: "there is an error",
-       data: result
-    })
- } catch (error) {
-    res.status(200).json({
-       message: error.message,
-    })
- }
+    try {
+        const result = await updateMedicineBrandService(req.body, req.params.id);
+        res.status(200).json({
+            message: "there is an error",
+            data: result
+        })
+    } catch (error) {
+        res.status(200).json({
+            message: error.message,
+        })
+    }
 }
+
 module.exports.deleteMedicineBrand = async (req, res, next) => {
     try {
-       const {id} = req.params;
+        const { id } = req.params;
         const result = await deleteMedicineBrandService(id);
         res.status(200).json({
             message: "there is an error",
@@ -73,8 +79,6 @@ module.exports.deleteMedicineBrand = async (req, res, next) => {
     } catch (error) {
         res.status(200).json({
             message: error.message,
-
         })
     }
 }
-// it s rules 

@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
-const {ObjectId} = mongoose.Schema.Types;
+const { ObjectId } = mongoose.Schema.Types;
+
 const medicineSchema = mongoose.Schema({
     name: {
         type: String,
@@ -16,25 +17,25 @@ const medicineSchema = mongoose.Schema({
         required: [true, "please describe some description"],
         trim: true
     },
-    imgUrl:{
-        type:String,
-        required:[true,"please provide img url"],
+    imgUrl: {
+        type: String,
+        required: [true, "please provide img url"],
         validate: [validator.isURL, "Please provide a valid url"],
-     },
-     category:{
-        type:String,
-        required:[true,"please provide category"],
-        trim:true
-     },
+    },
+    category: {
+        type: String,
+        required: [true, "please provide category"],
+        trim: true
+    },
     price: {
-        type: Number, 
+        type: Number,
         required: true
     },
     brand: {
         name: {
             type: String,
             trim: true,
-          required: [true, "Please provide a brand name"],
+            required: [true, "Please provide a brand name"],
         },
         id: {
             type: ObjectId,
@@ -45,11 +46,6 @@ const medicineSchema = mongoose.Schema({
     {
         timestamps: true
     });
-//     medicineSchema.pre('save',(next)=>{
-//     if(this.quantity==0){
-//         this.status="out-of-stock"
-//     }
-//     next()
-// })
+
 const Medicine = new mongoose.model("Medicine", medicineSchema);
-module.exports = Medicine 
+module.exports = Medicine;

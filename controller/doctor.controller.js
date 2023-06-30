@@ -42,7 +42,6 @@ module.exports.getDoctorById = async (req, res, next) => {
         })
     }
     catch (error) {
-
         res.status(400).json({
             result: error.message
         })

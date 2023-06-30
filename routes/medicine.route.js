@@ -4,7 +4,7 @@ const { verifyAdmin } = require("../middleware/verifyAdmin");
 const { verifyToken } = require("../middleware/verifyToken");
 
 const router = express.Router();
-//  brand get and update data 
+
 router
   .route("/medicine")
   .get(medicine.getMedicine)
@@ -17,7 +17,7 @@ router
   .get(medicine.getPaymentMedicine)
   .post(medicine.medicinePayment)
 
-  router
+router
   .route("/medicine/init/:id")
   .patch(medicine.updatePaymentMedicine)
 router

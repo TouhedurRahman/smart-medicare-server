@@ -1,10 +1,12 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
+
 app.use(express.json())
 app.use(cors())
 app.use("/images", express.static("images"))
 app.use(express.urlencoded({ extended: true }))
+
 const review = require("./routes/review.route")
 const user = require("./routes/user.route")
 const doctor = require("./routes/doctor.route");

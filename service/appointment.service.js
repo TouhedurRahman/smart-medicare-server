@@ -2,8 +2,7 @@ const Appointment = require("../model/appointment.model");
 const Doctor = require("../model/doctor.model");
 
 module.exports.getAppointmentService = async (email) => {
-	const date = new Date();
-	const result = await Appointment.find({ userEmail: email });
+	const result = await Appointment.find({ userEmail: email }).sort({ createdAt: -1 });
 	return result;
 }
 
@@ -13,7 +12,7 @@ module.exports.getAppointmentServiceById = async (id) => {
 }
 
 module.exports.getPaidAppointmentService = async (data) => {
-	const result = await Appointment.find({ paymentStatus: 'paid' });
+	const result = await Appointment.find({ paymentStatus: 'paid' }).sort({ createdAt: -1 });
 	return result;
 }
 

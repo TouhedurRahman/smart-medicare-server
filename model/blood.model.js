@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
+
 const BloodSchema = mongoose.Schema({
    firstName: {
       type: String,
@@ -49,5 +50,6 @@ const BloodSchema = mongoose.Schema({
    {
       timestamps: true
    })
+
 const Blood = new mongoose.model("Blood", BloodSchema);
-module.exports = Blood 
+module.exports = Blood;

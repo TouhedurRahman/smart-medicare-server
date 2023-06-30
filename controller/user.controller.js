@@ -27,7 +27,6 @@ module.exports.getUser = async (req, res, next) => {
 
 module.exports.postSignUp = async (req, res, next) => {
     try {
-
         const user = await postSignUpService(req.body);
 
         await user.save({ validateBeforeSave: false })
@@ -40,16 +39,15 @@ module.exports.postSignUp = async (req, res, next) => {
         });
     }
     catch (error) {
-
         res.status(501).json({
             message: "unAuthorized",
             error: error.message
         })
     }
 }
+
 module.exports.postSignIn = async (req, res, next) => {
     try {
-
         if (!req.body.password | !req.body.email) {
             return res.status(501).json({
                 error: "email or password is missing"
@@ -81,6 +79,7 @@ module.exports.postSignIn = async (req, res, next) => {
         })
     }
 }
+
 module.exports.getMe = async (req, res, next) => {
     try {
         const email = req.params.id
@@ -94,6 +93,7 @@ module.exports.getMe = async (req, res, next) => {
 
     }
 }
+
 module.exports.getToken = async (req, res, next) => {
     try {
         const result = await findUserByEmail(req.query.email);
@@ -107,6 +107,7 @@ module.exports.getToken = async (req, res, next) => {
 
     }
 }
+
 module.exports.postFileUpload = async (req, res) => {
     try {
         const file = req.file;
@@ -124,6 +125,7 @@ module.exports.postFileUpload = async (req, res) => {
         })
     }
 }
+
 module.exports.userMakeAdmin = async (req, res) => {
     try {
         const { id } = req.params;

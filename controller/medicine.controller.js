@@ -1,31 +1,33 @@
 const MediPayment = require("../model/medicinePayment.model");
+
 const {
     getMedicineService,
     getMedicineServiceById,
     postMedicineService,
     deleteMedicineServiceById
 } = require("../service/Medicine.service");
+
 const { v4: uuidv4 } = require('uuid');
 const SSLCommerzPayment = require("sslcommerz-lts");
+
 module.exports.getMedicine = async (req, res, next) => {
     try {
-       
-       let category =req.query; 
- 
-        if(!category.category){
-            category ={}
+        let category = req.query;
+
+        if (!category.category) {
+            category = {}
         }
         let queries = {};
-        if(req.query.page){
-            const {page=0,limit=10} = req.query;
-            const skip = parseInt(page)*parseInt(limit);
+        if (req.query.page) {
+            const { page = 0, limit = 10 } = req.query;
+            const skip = parseInt(page) * parseInt(limit);
             queries.skip = skip;
             queries.limit = parseInt(limit);
-           }
-        const result = await getMedicineService(category,queries);
+        }
+        const result = await getMedicineService(category, queries);
         res.status(200).json({
             message: "success",
-            result: result 
+            result: result
         })
     }
     catch (error) {
@@ -50,6 +52,7 @@ module.exports.postMedicine = async (req, res, next) => {
         })
     }
 }
+
 module.exports.getMedicineById = async (req, res, next) => {
     try {
         const id = req.params.id;
@@ -65,6 +68,7 @@ module.exports.getMedicineById = async (req, res, next) => {
         })
     }
 }
+
 module.exports.deleteMedicineById = async (req, res, next) => {
     try {
         const id = req.params.id;
@@ -79,8 +83,7 @@ module.exports.deleteMedicineById = async (req, res, next) => {
             error: error
         })
     }
-} 
-
+}
 
 module.exports.medicinePayment = async (req, res, next) => {
     try {
@@ -112,10 +115,10 @@ module.exports.medicinePayment = async (req, res, next) => {
             ship_add2: 'Dhaka',
             ship_city: 'Dhaka',
             ship_state: 'Dhaka',
-            product_id:req.body.id,
+            product_id: req.body.id,
             ship_postcode: 1000,
             ship_country: 'Bangladesh',
-            email:req.body.email
+            email: req.body.email
         };
         const result = await MediPayment(data).save();
         const sslcz = new SSLCommerzPayment(process.env.STORE_ID, process.env.STORE_PASSWORD, false)
@@ -124,7 +127,6 @@ module.exports.medicinePayment = async (req, res, next) => {
                 result: data.GatewayPageURL
             })
         });
- 
     }
     catch (error) {
         console.log(error.message);
@@ -133,39 +135,40 @@ module.exports.medicinePayment = async (req, res, next) => {
         })
     }
 }
-module.exports.getPaymentMedicine = async (req ,res) =>{
-    try{
-        const {email} = req.params;
+
+module.exports.getPaymentMedicine = async (req, res) => {
+    try {
+        const { email } = req.params;
         let result;
-        if(email){
-            result = await MediPayment.find({ email: email })
+        if (email) {
+            result = await MediPayment.find({ email: email }).sort({ createdAt: -1 })
         }
-      else{
+        else {
             result = await MediPayment.find({})
-         }
-     res.status(200).json({
-        result: result
-    })
+        }
+        res.status(200).json({
+            result: result
+        })
     }
-     catch (error) {
-         console.log(error.message);
-         res.status(200).json({
-             error: error.message
-         })
-     }
-    }
- 
-module.exports.updatePaymentMedicine = async (req,res) =>{
-   try{
-    const {id} = req.params;
-    console.log(id);
-    const result =  await MediPayment.updateOne({_id:id},{$set:{status:"deliver"}},{runValidators:true})
-    return result;
-   }
     catch (error) {
         console.log(error.message);
         res.status(200).json({
             error: error.message
         })
     }
-   }
+}
+
+module.exports.updatePaymentMedicine = async (req, res) => {
+    try {
+        const { id } = req.params;
+        console.log(id);
+        const result = await MediPayment.updateOne({ _id: id }, { $set: { status: "deliver" } }, { runValidators: true })
+        return result;
+    }
+    catch (error) {
+        console.log(error.message);
+        res.status(200).json({
+            error: error.message
+        })
+    }
+}
