@@ -9,6 +9,7 @@ const {
 
 const { v4: uuidv4 } = require('uuid');
 const SSLCommerzPayment = require("sslcommerz-lts");
+const Medicine = require("../model/medicine.model");
 
 module.exports.getMedicine = async (req, res, next) => {
     try {
@@ -19,7 +20,7 @@ module.exports.getMedicine = async (req, res, next) => {
         }
         let queries = {};
         if (req.query.page) {
-            const { page = 0, limit = 10 } = req.query;
+            const { page = 0, limit = 8 } = req.query;
             const skip = parseInt(page) * parseInt(limit);
             queries.skip = skip;
             queries.limit = parseInt(limit);
@@ -33,6 +34,18 @@ module.exports.getMedicine = async (req, res, next) => {
     catch (error) {
         res.status(500).json({
             error: error.message
+        })
+    }
+}
+
+module.exports.medicineCount = async (req, res) => {
+    try {
+        const count = await Medicine.countDocuments();
+        res.send({ count });
+    }
+    catch (error) {
+        res.status(500).json({
+            error: error
         })
     }
 }
